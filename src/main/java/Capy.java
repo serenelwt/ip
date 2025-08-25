@@ -45,8 +45,7 @@ public class Capy {
                 tasks[taskCount] = new Event(parts[0].trim(), parts[1].trim(), parts[2].trim());
                 taskCount++;
                 printAdded(tasks[taskCount - 1], taskCount);
-            }
-            else if (input.startsWith("mark ")) {
+            } else if (input.startsWith("mark ")) {
                 int taskNum = Integer.parseInt(input.substring(5));
                 tasks[taskNum - 1].markDone();
                 System.out.println("____________________________________________________________");
@@ -61,11 +60,8 @@ public class Capy {
                 System.out.println("   " + tasks[taskNum - 1]);
                 System.out.println("____________________________________________________________");
             } else {
-                tasks[taskCount] = new Task(input);
-                taskCount++;
-
                 System.out.println("____________________________________________________________");
-                System.out.println(" added: " + input);
+                System.out.println(" Sorry, I don't understand: " + input);
                 System.out.println("____________________________________________________________");
             }
 
