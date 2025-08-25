@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Capy {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int taskCount = 0;
 
         System.out.println("____________________________________________________________");
@@ -25,12 +25,13 @@ public class Capy {
                 break;
             } else if (input.equals("list")) {
                 System.out.println("____________________________________________________________");
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < taskCount; i++) {
                     System.out.println(" " + (i + 1) + ". " + tasks[i]);
                 }
                 System.out.println("____________________________________________________________");
             } else {
-                tasks[taskCount] = input;
+                tasks[taskCount] = new Task(input);
                 taskCount++;
 
                 System.out.println("____________________________________________________________");
