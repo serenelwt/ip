@@ -29,7 +29,15 @@ public class Capy {
                     System.out.println(" " + (i + 1) + ". " + tasks[i]);
                 }
                 System.out.println("____________________________________________________________");
+            } else {
+                tasks[taskCount] = input;
+                taskCount++;
+
+                System.out.println("____________________________________________________________");
+                System.out.println(" added: " + input);
+                System.out.println("____________________________________________________________");
             }
+
 
             System.out.println("____________________________________________________________");
             System.out.println(" " + input);
