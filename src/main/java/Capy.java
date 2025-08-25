@@ -22,7 +22,13 @@ public class Capy {
                 System.out.println("____________________________________________________________");
                 System.out.println(" Bye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
-                break; // exit the loop
+                break;
+            } else if (input.equals("list")) {
+                System.out.println("____________________________________________________________");
+                for (int i = 0; i < taskCount; i++) {
+                    System.out.println(" " + (i + 1) + ". " + tasks[i]);
+                }
+                System.out.println("____________________________________________________________");
             }
 
             System.out.println("____________________________________________________________");
