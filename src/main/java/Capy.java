@@ -30,7 +30,13 @@ public class Capy {
                     System.out.println(" " + (i + 1) + ". " + tasks[i]);
                 }
                 System.out.println("____________________________________________________________");
-            } else if (input.startsWith("mark ")) {
+            } else if (input.startsWith("todo")) {
+                String description = input.substring(5);
+                tasks[taskCount] = new Todo(description);
+                taskCount++;
+                printAdded(tasks[taskCount - 1], taskCount);
+            }
+            else if (input.startsWith("mark ")) {
                 int taskNum = Integer.parseInt(input.substring(5));
                 tasks[taskNum - 1].markDone();
                 System.out.println("____________________________________________________________");
@@ -56,6 +62,14 @@ public class Capy {
         }
 
         sc.close();
+    }
+
+    private static void printAdded(Task task, int count) {
+        System.out.println("____________________________________________________________");
+        System.out.println(" Got it. I've added this task:");
+        System.out.println("   " + task);
+        System.out.println(" Now you have " + count + " tasks in the list.");
+        System.out.println("____________________________________________________________");
     }
 
 }
