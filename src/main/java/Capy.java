@@ -30,7 +30,15 @@ public class Capy {
                     System.out.println(" " + (i + 1) + ". " + tasks[i]);
                 }
                 System.out.println("____________________________________________________________");
-            } else {
+            } else if (input.startsWith("mark ")) {
+                int taskNum = Integer.parseInt(input.substring(5));
+                tasks[taskNum - 1].markDone();
+                System.out.println("____________________________________________________________");
+                System.out.println(" Nice! I've marked this task as done:");
+                System.out.println("   " + tasks[taskNum - 1]);
+                System.out.println("____________________________________________________________");
+            }
+            else {
                 tasks[taskCount] = new Task(input);
                 taskCount++;
 
