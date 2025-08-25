@@ -35,6 +35,11 @@ public class Capy {
                 tasks[taskCount] = new Todo(description);
                 taskCount++;
                 printAdded(tasks[taskCount - 1], taskCount);
+            } else if (input.startsWith("deadline")) {
+                String[] parts = input.substring(9).split("/by", 2);
+                tasks[taskCount] = new Deadline(parts[0].trim(), parts[1].trim());
+                taskCount++;
+                printAdded(tasks[taskCount - 1], taskCount);
             }
             else if (input.startsWith("mark ")) {
                 int taskNum = Integer.parseInt(input.substring(5));
