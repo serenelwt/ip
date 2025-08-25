@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Capy {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        String[] tasks = new String[100];
+        int taskCount = 0;
+
         System.out.println("____________________________________________________________");
         System.out.println(" Hello! I'm Capy");
         System.out.println(" What can I do for you?");
