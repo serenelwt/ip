@@ -40,6 +40,11 @@ public class Capy {
                 tasks[taskCount] = new Deadline(parts[0].trim(), parts[1].trim());
                 taskCount++;
                 printAdded(tasks[taskCount - 1], taskCount);
+            } else if (input.startsWith("event")) {
+                String[] parts = input.substring(6).split("/from|/to");
+                tasks[taskCount] = new Event(parts[0].trim(), parts[1].trim(), parts[2].trim());
+                taskCount++;
+                printAdded(tasks[taskCount - 1], taskCount);
             }
             else if (input.startsWith("mark ")) {
                 int taskNum = Integer.parseInt(input.substring(5));
