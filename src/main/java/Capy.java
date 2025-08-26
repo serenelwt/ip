@@ -37,6 +37,9 @@ public class Capy {
                     printAdded(tasks[taskCount - 1], taskCount);
                 } else if (input.startsWith("deadline")) {
                     String[] parts = input.substring(9).split("/by", 2);
+                    if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
+                        throw new CapyException("OOPS!!! Deadline command must have a description and /by date/time. Fill them up if you haven't done so!!");
+                    }
                     tasks[taskCount] = new Deadline(parts[0].trim(), parts[1].trim());
                     taskCount++;
                     printAdded(tasks[taskCount - 1], taskCount);
