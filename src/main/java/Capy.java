@@ -75,6 +75,18 @@ public class Capy {
                     System.out.println("   " + tasks.get(taskNum));
                     System.out.println("____________________________________________________________");
 
+                } else if (input.startsWith("delete ")) {
+                    int taskNum = Integer.parseInt(input.substring(7)) - 1;
+                    if (taskNum < 0 || taskNum >= tasks.size()) {
+                        throw new CapyException("OOPS!!! Task number out of range.");
+                    }
+                    Task removed = tasks.remove(taskNum);
+                    System.out.println("____________________________________________________________");
+                    System.out.println(" Noted. I've removed this task:");
+                    System.out.println("   " + removed);
+                    System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+
                 } else {
                     throw new CapyException("OOPS!!! Capy is sorry, but Capy don't know what that means :-(");
                 }
