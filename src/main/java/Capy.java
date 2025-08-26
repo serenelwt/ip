@@ -53,6 +53,9 @@ public class Capy {
                     printAdded(tasks[taskCount - 1], taskCount);
                 } else if (input.startsWith("mark ")) {
                     int taskNum = Integer.parseInt(input.substring(5));
+                    if (taskNum < 1 || taskNum > taskCount) {
+                        throw new CapyException("OOPS!!! Task number out of range. Please enter again!!");
+                    }
                     tasks[taskNum - 1].markDone();
                     System.out.println("____________________________________________________________");
                     System.out.println(" Nice! I've marked this task as done:");
