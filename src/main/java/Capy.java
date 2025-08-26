@@ -63,6 +63,9 @@ public class Capy {
                     System.out.println("____________________________________________________________");
                 } else if (input.startsWith("unmark ")) {
                     int taskNum = Integer.parseInt(input.substring(7));
+                    if (taskNum < 1 || taskNum > taskCount) {
+                        throw new CapyException("OOPS!!! Task number out of range. Please enter again!!");
+                    }
                     tasks[taskNum - 1].markNotDone();
                     System.out.println("____________________________________________________________");
                     System.out.println(" OK, I've marked this task as not done yet:");
