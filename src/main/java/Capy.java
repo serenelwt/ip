@@ -72,9 +72,7 @@ public class Capy {
                     System.out.println("   " + tasks[taskNum - 1]);
                     System.out.println("____________________________________________________________");
                 } else {
-                    System.out.println("____________________________________________________________");
-                    System.out.println(" Sorry, I don't understand: " + input);
-                    System.out.println("____________________________________________________________");
+                    throw new CapyException("OOPS!!! Capy is sorry, but Capy don't know what that means :-(");
                 }
 
             }
