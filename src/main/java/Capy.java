@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Capy {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Task[] tasks = new Task[100];
-        int taskCount = 0;
+        ArrayList<Task> tasks = new ArrayList<>();  
 
         System.out.println("____________________________________________________________");
         System.out.println(" Hello! I'm Capy");
