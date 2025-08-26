@@ -45,6 +45,9 @@ public class Capy {
                     printAdded(tasks[taskCount - 1], taskCount);
                 } else if (input.startsWith("event")) {
                     String[] parts = input.substring(6).split("/from|/to");
+                    if (parts.length < 3 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty() || parts[2].trim().isEmpty()) {
+                        throw new CapyException("OOPS!!! Event command must have a description, /from and /to time. Fill them up if you haven't done so!!");
+                    }
                     tasks[taskCount] = new Event(parts[0].trim(), parts[1].trim(), parts[2].trim());
                     taskCount++;
                     printAdded(tasks[taskCount - 1], taskCount);
