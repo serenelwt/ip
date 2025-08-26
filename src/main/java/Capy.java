@@ -75,17 +75,25 @@ public class Capy {
                     throw new CapyException("OOPS!!! Capy is sorry, but Capy don't know what that means :-(");
                 }
 
+            } catch (CapyException e) {
+                System.out.println("____________________________________________________________");
+                System.out.println(" " + e.getMessage());
+                System.out.println("____________________________________________________________");
+            } catch (NumberFormatException e) {
+                System.out.println("____________________________________________________________");
+                System.out.println(" OOPS!!! That doesn't look like a valid number.");
+                System.out.println("____________________________________________________________");
             }
-
-            sc.close();
         }
-
-        private static void printAdded (Task task,int count){
-            System.out.println("____________________________________________________________");
-            System.out.println(" Got it. I've added this task:");
-            System.out.println("   " + task);
-            System.out.println(" Now you have " + count + " tasks in the list.");
-            System.out.println("____________________________________________________________");
-        }
-
+        sc.close();
     }
+
+    private static void printAdded(Task task, int count) {
+        System.out.println("____________________________________________________________");
+        System.out.println(" Got it. I've added this task:");
+        System.out.println("   " + task);
+        System.out.println(" Now you have " + count + " tasks in the list.");
+        System.out.println("____________________________________________________________");
+    }
+
+}
