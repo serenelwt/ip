@@ -157,5 +157,18 @@ public class Capy {
         }
     }
 
+    private static void saveTasks(List<Task> tasks) {
+        File folder = new File(DATA_FOLDER);
+        if (!folder.exists()) folder.mkdirs();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE))) {
+            for (Task task : tasks) {
+                writer.write(task.toFileString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
+    }
 
 }
