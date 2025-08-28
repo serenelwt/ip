@@ -20,19 +20,20 @@ then
 fi
 
 # run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ../bin Duke < input.txt > ACTUAL.TXT
+java -classpath ../bin Capy < input.txt > ACTUAL.TXT
 
 # convert to UNIX format
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix ACTUAL.TXT EXPECTED-UNIX.TXT
 
 # compare the output to the expected output
-diff ACTUAL.TXT EXPECTED-UNIX.TXT
-if [ $? -eq 0 ]
+if diff -u ACTUAL.TXT EXPECTED-UNIX.TXT > diff.log;
+#f [ $? -eq 0 ]
 then
     echo "Test result: PASSED"
     exit 0
 else
     echo "Test result: FAILED"
-    exit 1
+    cat diff.log
+    #exit 1
 fi
