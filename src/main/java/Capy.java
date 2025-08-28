@@ -1,10 +1,14 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Capy {
+    private static final String DATA_FOLDER = "./data";
+    private static final String DATA_FILE = DATA_FOLDER + "/capy.txt";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
+        loadTasks(tasks);
 
         System.out.println("____________________________________________________________");
         System.out.println(" Hello! I'm Capy");
@@ -111,5 +115,42 @@ public class Capy {
         System.out.println(" Now you have " + count + " tasks in the list.");
         System.out.println("____________________________________________________________");
     }
+
+    private static void loadTasks(List<Task> tasks) {
+        File file = new File(DATA_FILE);
+        if (!file.exists()) return;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" \\| ");
+                String type = parts[0];
+                boolean isDone = parts[1].equals("1");
+                String description = parts[2];
+
+                Task task = null;
+                switch (type) {
+                    case "T":
+                        task = new Todo(description);
+                        break;
+                    case "D":
+                        task = new Deadline(description, parts[3]);
+                        break;
+                    case "E":
+                        String[] times = parts[3].split("-");
+                        task = new Event(description, times[0], times[1]);
+                        break;
+                }
+
+                if (task != null && isDone) task.markDone();
+                if (task != null) tasks.add(task);
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading tasks: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Data file is corrupted or invalid.");
+        }
+    }
+
 
 }
