@@ -1,10 +1,19 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.util.*;
+import java.io.*;
+/**
+ * Capy is a simple command-line chatbot that manages a task list.
+ * It supports adding, listing, marking, unmarking, and deleting tasks.
+ * Tasks can be of type Todo, Deadline, or Event, and are saved to disk
+ * automatically to provide persistent storage across sessions.
+ */
 public class Capy {
+    private static final String DATA_FOLDER = "./data";
+    private static final String DATA_FILE = DATA_FOLDER + "/capy.txt";
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
+        loadTasks(tasks);
 
         System.out.println("____________________________________________________________");
         System.out.println(" Hello! I'm Capy");
@@ -58,10 +67,10 @@ public class Capy {
                     if (taskNum < 1 || taskNum > tasks.size()) {
                         throw new CapyException("OOPS!!! Task number out of range. Please enter again!!");
                     }
-                    tasks.get(taskNum).markDone();
+                    tasks.get(taskNum - 1).markDone();
                     System.out.println("____________________________________________________________");
                     System.out.println(" Nice! I've marked this task as done:");
-                    System.out.println("   " + tasks.get(taskNum));
+                    System.out.println("   " + tasks.get(taskNum - 1));
                     System.out.println("____________________________________________________________");
 
                 } else if (input.startsWith("unmark ")) {
@@ -69,10 +78,10 @@ public class Capy {
                     if (taskNum < 1 || taskNum > tasks.size()) {
                         throw new CapyException("OOPS!!! Task number out of range. Please enter again!!");
                     }
-                    tasks.get(taskNum).markNotDone();
+                    tasks.get(taskNum - 1).markNotDone();
                     System.out.println("____________________________________________________________");
                     System.out.println(" OK, I've marked this task as not done yet:");
-                    System.out.println("   " + tasks.get(taskNum));
+                    System.out.println("   " + tasks.get(taskNum - 1));
                     System.out.println("____________________________________________________________");
 
                 } else if (input.startsWith("delete ")) {
@@ -100,6 +109,9 @@ public class Capy {
                 System.out.println(" OOPS!!! That doesn't look like a valid number.");
                 System.out.println("____________________________________________________________");
             }
+
+            saveTasks(tasks);
+
         }
         sc.close();
     }
@@ -110,6 +122,56 @@ public class Capy {
         System.out.println("   " + task);
         System.out.println(" Now you have " + count + " tasks in the list.");
         System.out.println("____________________________________________________________");
+    }
+
+    private static void loadTasks(List<Task> tasks) {
+        File file = new File(DATA_FILE);
+        if (!file.exists()) return;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" \\| ");
+                String type = parts[0];
+                boolean isDone = parts[1].equals("1");
+                String description = parts[2];
+
+                Task task = null;
+                switch (type) {
+                    case "T":
+                        task = new Todo(description);
+                        break;
+                    case "D":
+                        task = new Deadline(description, parts[3]);
+                        break;
+                    case "E":
+                        String[] times = parts[3].split("-");
+                        task = new Event(description, times[0], times[1]);
+                        break;
+                }
+
+                if (task != null && isDone) task.markDone();
+                if (task != null) tasks.add(task);
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading tasks: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Data file is corrupted or invalid.");
+        }
+    }
+
+    private static void saveTasks(List<Task> tasks) {
+        File folder = new File(DATA_FOLDER);
+        if (!folder.exists()) folder.mkdirs();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(DATA_FILE))) {
+            for (Task task : tasks) {
+                writer.write(task.toFileString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+        }
     }
 
 }
