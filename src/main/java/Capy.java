@@ -67,10 +67,10 @@ public class Capy {
                     if (taskNum < 1 || taskNum > tasks.size()) {
                         throw new CapyException("OOPS!!! Task number out of range. Please enter again!!");
                     }
-                    tasks.get(taskNum).markDone();
+                    tasks.get(taskNum - 1).markDone();
                     System.out.println("____________________________________________________________");
                     System.out.println(" Nice! I've marked this task as done:");
-                    System.out.println("   " + tasks.get(taskNum));
+                    System.out.println("   " + tasks.get(taskNum - 1));
                     System.out.println("____________________________________________________________");
 
                 } else if (input.startsWith("unmark ")) {
@@ -78,10 +78,10 @@ public class Capy {
                     if (taskNum < 1 || taskNum > tasks.size()) {
                         throw new CapyException("OOPS!!! Task number out of range. Please enter again!!");
                     }
-                    tasks.get(taskNum).markNotDone();
+                    tasks.get(taskNum - 1).markNotDone();
                     System.out.println("____________________________________________________________");
                     System.out.println(" OK, I've marked this task as not done yet:");
-                    System.out.println("   " + tasks.get(taskNum));
+                    System.out.println("   " + tasks.get(taskNum - 1));
                     System.out.println("____________________________________________________________");
 
                 } else if (input.startsWith("delete ")) {
@@ -109,6 +109,9 @@ public class Capy {
                 System.out.println(" OOPS!!! That doesn't look like a valid number.");
                 System.out.println("____________________________________________________________");
             }
+
+            saveTasks(tasks);
+
         }
         sc.close();
     }
