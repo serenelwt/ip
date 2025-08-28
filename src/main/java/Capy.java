@@ -1,6 +1,11 @@
 import java.util.*;
 import java.io.*;
-
+/**
+ * Capy is a simple command-line chatbot that manages a task list.
+ * It supports adding, listing, marking, unmarking, and deleting tasks.
+ * Tasks can be of type Todo, Deadline, or Event, and are saved to disk
+ * automatically to provide persistent storage across sessions.
+ */
 public class Capy {
     private static final String DATA_FOLDER = "./data";
     private static final String DATA_FILE = DATA_FOLDER + "/capy.txt";
