@@ -1,6 +1,6 @@
-public class Task {
-    private final String description;
-    private boolean isDone;
+public abstract class Task {
+    protected final String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -13,6 +13,8 @@ public class Task {
     public void markNotDone() {
         this.isDone = false;
     }
+
+    public abstract String toFileString();
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
