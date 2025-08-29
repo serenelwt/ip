@@ -62,7 +62,7 @@ public class Capy {
                     }
                     String description = parts[0].trim();
                     LocalDateTime by = parseDateTime(parts[1].trim());
-                    tasks.add(new Deadline(description, by);
+                    tasks.add(new Deadline(description, by));
                     printAdded(tasks.get(tasks.size() - 1), tasks.size());
 
                 } else if (input.startsWith("event")) {
@@ -70,7 +70,10 @@ public class Capy {
                     if (parts.length < 3 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty() || parts[2].trim().isEmpty()) {
                         throw new CapyException("OOPS!!! Event command must have a description, /from and /to time. Fill them up if you haven't done so!!");
                     }
-                    tasks.add(new Event(parts[0].trim(), parts[1].trim(), parts[2].trim()));
+                    String description = parts[0].trim();
+                    LocalDateTime from = parseDateTime(parts[1].trim());
+                    LocalDateTime to = parseDateTime(parts[2].trim());
+                    tasks.add(new Event(description, from, to));
                     printAdded(tasks.get(tasks.size() - 1), tasks.size());
 
                 } else if (input.startsWith("mark ")) {
@@ -127,6 +130,13 @@ public class Capy {
         sc.close();
     }
 
+
+    /**
+     * Prints a message after a task has been added.
+     *
+     * @param task  The task that was added.
+     * @param count The total number of tasks.
+     */
     private static void printAdded(Task task, int count) {
         System.out.println("____________________________________________________________");
         System.out.println(" Got it. I've added this task:");
@@ -135,6 +145,11 @@ public class Capy {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Loads tasks from disk into the task list.
+     *
+     * @param tasks The list to populate with tasks.
+     */
     private static void loadTasks(List<Task> tasks) {
         File file = new File(DATA_FILE);
         if (!file.exists()) return;
@@ -146,18 +161,21 @@ public class Capy {
                 String type = parts[0];
                 boolean isDone = parts[1].equals("1");
                 String description = parts[2];
-
                 Task task = null;
+
                 switch (type) {
                     case "T":
                         task = new Todo(description);
                         break;
                     case "D":
-                        task = new Deadline(description, parts[3]);
+                        LocalDateTime by = parseDateTime(parts[3]);
+                        task = new Deadline(description, by);
                         break;
                     case "E":
                         String[] times = parts[3].split("-");
-                        task = new Event(description, times[0], times[1]);
+                        LocalDateTime from = parseDateTime(times[0]);
+                        LocalDateTime to = parseDateTime(times[1]);
+                        task = new Event(description, from, to);
                         break;
                 }
 
@@ -171,6 +189,11 @@ public class Capy {
         }
     }
 
+    /**
+     * Saves tasks to disk.
+     *
+     * @param tasks The list of tasks to save.
+     */
     private static void saveTasks(List<Task> tasks) {
         File folder = new File(DATA_FOLDER);
         if (!folder.exists()) folder.mkdirs();

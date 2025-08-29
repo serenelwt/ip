@@ -15,10 +15,10 @@ public class Deadline extends Task {
      * @param description Description of the task.
      * @param by Deadline in yyyy-mm-dd HHmm format (e.g., 2019-12-02 1800).
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        this.by = LocalDateTime.parse(by, formatter);
+        this.by = by;
     }
 
     /**
