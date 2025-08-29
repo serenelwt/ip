@@ -1,14 +1,23 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Capy is a simple command-line chatbot that manages a task list.
- * It supports adding, listing, marking, unmarking, and deleting tasks.
+ * It supports adding, listing, marking, unmarking, and deleting tasks,
+ * and understands deadlines and events with date/time.
  * Tasks can be of type Todo, Deadline, or Event, and are saved to disk
  * automatically to provide persistent storage across sessions.
  */
 public class Capy {
     private static final String DATA_FOLDER = "./data";
     private static final String DATA_FILE = DATA_FOLDER + "/capy.txt";
+    private static final DateTimeFormatter FILE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -51,7 +60,9 @@ public class Capy {
                     if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
                         throw new CapyException("OOPS!!! Deadline command must have a description and /by date/time. Fill them up if you haven't done so!!");
                     }
-                    tasks.add(new Deadline(parts[0].trim(), parts[1].trim()));
+                    String description = parts[0].trim();
+                    LocalDateTime by = parseDateTime(parts[1].trim());
+                    tasks.add(new Deadline(description, by);
                     printAdded(tasks.get(tasks.size() - 1), tasks.size());
 
                 } else if (input.startsWith("event")) {
@@ -174,4 +185,18 @@ public class Capy {
         }
     }
 
+    /**
+     * Converts a string to LocalDateTime.
+     *
+     * @param input The string in format "yyyy-MM-dd HHmm".
+     * @return Parsed LocalDateTime object.
+     * @throws CapyException If parsing fails.
+     */
+    private static LocalDateTime parseDateTime(String input) throws CapyException {
+        try {
+            return LocalDateTime.parse(input, FILE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new CapyException("OOPS! Invalid date/time format. Use yyyy-MM-dd HHmm");
+        }
+    }
 }
