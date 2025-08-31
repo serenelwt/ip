@@ -47,9 +47,23 @@ public class Capy {
                         System.out.println(" " + (i + 1) + ". " + tasks.getAllTasks().get(i));
                     }
                     ui.showLine();
+
+                } else if (input.startsWith("todo")) {
+                    handleTodo(input);
                 }
             }
         }
+    }
+
+    /** Handles todo command */
+    private void handleTodo(String input) throws CapyException {
+        if (input.trim().equals("todo")) {
+            throw new CapyException("OOPS! The description of a todo cannot be empty!");
+        }
+        String description = input.substring(5).trim();
+        Task task = new Task(description);
+        tasks.add(task);
+        ui.showAdded(task, tasks.size());
     }
 }
         while (true) {
