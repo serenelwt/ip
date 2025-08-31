@@ -56,6 +56,16 @@ public class Capy {
 
                 } else if (input.startsWith("event")) {
                     handleEvent(input);
+
+                } else if (input.startsWith("mark")) {
+                    int index = Integer.parseInt(input.substring(5)) - 1;
+                    tasks.mark(index);
+                    ui.showMark(tasks.getAllTasks().get(index));
+
+                } else if (input.startsWith("unmark")) {
+                    int index = Integer.parseInt(input.substring(7)) - 1;
+                    tasks.unmark(index);
+                    ui.showUnmark(tasks.getAllTasks().get(index));
                 }
             }
         }
