@@ -130,4 +130,3 @@ public class Capy {
         new Capy(DATA_FILE).run();
     }
 }
-      
