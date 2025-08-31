@@ -1,3 +1,5 @@
+package capy;
+
 import java.util.Scanner;
 
 /**
