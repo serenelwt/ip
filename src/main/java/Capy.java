@@ -1,28 +1,27 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.io.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Capy is a simple command-line chatbot that manages a task list.
- * It supports adding, listing, marking, unmarking, and deleting tasks,
- * and understands deadlines and events with date/time.
- * Tasks can be of type Todo, Deadline, or Event, and are saved to disk
- * automatically to provide persistent storage across sessions.
+ * Refactored to use OOP: Ui, Storage, TaskList, Parser.
  */
 public class Capy {
     private static final String DATA_FOLDER = "./data";
     private static final String DATA_FILE = DATA_FOLDER + "/capy.txt";
-    private static final DateTimeFormatter FILE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    private static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
     private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
 
     public Capy(String filePath) {
         ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (Exception e) {
+            ui.showError("Error loading tasks from file. Starting with empty task list.");
+            tasks = new TaskList();
+        }
+    }
 
         while (true) {
             String input = sc.nextLine();
