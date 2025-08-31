@@ -50,6 +50,9 @@ public class Capy {
 
                 } else if (input.startsWith("todo")) {
                     handleTodo(input);
+
+                } else if (input.startsWith("deadline")) {
+
                 }
             }
         }
@@ -62,6 +65,19 @@ public class Capy {
         }
         String description = input.substring(5).trim();
         Task task = new Task(description);
+        tasks.add(task);
+        ui.showAdded(task, tasks.size());
+    }
+
+    /** Handles deadline command */
+    private void handleDeadline(String input) throws CapyException {
+        String[] parts = input.substring(9).split("/by", 2);
+        if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
+            throw new CapyException("OOPS!!! Deadline command must have a description and /by date/time. Fill them up if you haven't done so!!");
+        }
+        String description = parts[0].trim();
+        LocalDateTime by = Parser.parseDateTime(parts[1].trim());
+        Task task = new Deadline(description, by);
         tasks.add(task);
         ui.showAdded(task, tasks.size());
     }
