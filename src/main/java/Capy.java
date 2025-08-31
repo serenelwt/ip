@@ -52,7 +52,10 @@ public class Capy {
                     handleTodo(input);
 
                 } else if (input.startsWith("deadline")) {
+                    handleDeadline(input);
 
+                } else if (input.startsWith("event")) {
+                    handleEvent(input);
                 }
             }
         }
@@ -78,6 +81,19 @@ public class Capy {
         String description = parts[0].trim();
         LocalDateTime by = Parser.parseDateTime(parts[1].trim());
         Task task = new Deadline(description, by);
+        tasks.add(task);
+        ui.showAdded(task, tasks.size());
+    }
+
+    private void handleEvent(String input) throws CapyException {
+        String[] parts = input.substring(6).split("/from|/to");
+        if (parts.length < 3 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty() || parts[2].trim().isEmpty()) {
+            throw new CapyException("OOPS!!! Event command must have a description, /from and /to time. Fill them up if you haven't done so!!");
+        }
+        String description = parts[0].trim();
+        LocalDateTime from = Parser.parseDateTime(parts[1].trim());
+        LocalDateTime to = Parser.parseDateTime(parts[2].trim());
+        Task task = new Event(description, from, to);
         tasks.add(task);
         ui.showAdded(task, tasks.size());
     }
