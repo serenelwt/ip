@@ -23,6 +23,35 @@ public class Capy {
         }
     }
 
+    /**
+     * Main loop to run the chatbot
+     */
+    public void run() {
+        ui.showWelcome();
+
+        boolean isExit = false;
+
+        while (!isExit) {
+            try {
+                String input = ui.readCommand();
+                ui.showLine();
+
+                if (input.equals("bye")) {
+                    isExit = true;
+                    ui.showBye();
+
+                } else if (input.equals("list")) {
+                    ui.showLine();
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(" " + (i + 1) + ". " + tasks.getAllTasks().get(i));
+                    }
+                    ui.showLine();
+                }
+            }
+        }
+    }
+}
         while (true) {
             String input = sc.nextLine();
 
