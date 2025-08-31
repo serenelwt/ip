@@ -19,15 +19,10 @@ public class Capy {
     private static final DateTimeFormatter FILE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
-        loadTasks(tasks);
+    private Ui ui;
 
-        System.out.println("____________________________________________________________");
-        System.out.println(" Hello! I'm Capy");
-        System.out.println(" What can I do for you?");
-        System.out.println("____________________________________________________________");
+    public Capy(String filePath) {
+        ui = new Ui();
 
         while (true) {
             String input = sc.nextLine();
