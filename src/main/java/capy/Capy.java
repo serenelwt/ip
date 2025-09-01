@@ -102,7 +102,7 @@ public class Capy {
             throw new CapyException("OOPS! The description of a todo cannot be empty!");
         }
         String description = input.substring(5).trim();
-        Task task = new Task(description);
+        Task task = new Todo(description);
         tasks.add(task);
         ui.showAdded(task, tasks.size());
     }
