@@ -114,6 +114,7 @@ public class Capy {
         ui.showAdded(task, tasks.size());
     }
 
+    /** Handles event command */
     private void handleEvent(String input) throws CapyException {
         String[] parts = input.substring(6).split("/from|/to");
         if (parts.length < 3 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty() || parts[2].trim().isEmpty()) {
