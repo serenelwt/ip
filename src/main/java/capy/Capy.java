@@ -10,8 +10,8 @@ public class Capy {
     private static final String DATA_FOLDER = "./data";
     private static final String DATA_FILE = DATA_FOLDER + "/capy.txt";
 
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList tasks;
 
     public Capy(String filePath) {
@@ -43,12 +43,7 @@ public class Capy {
                     ui.showBye();
 
                 } else if (input.equals("list")) {
-                    ui.showLine();
-                    System.out.println("Here are the tasks in your list:");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.println(" " + (i + 1) + ". " + tasks.getAllTasks().get(i));
-                    }
-                    ui.showLine();
+                    ui.showTaskList(tasks);
 
                 } else if (input.startsWith("todo")) {
                     handleTodo(input);
@@ -105,7 +100,8 @@ public class Capy {
     private void handleDeadline(String input) throws CapyException {
         String[] parts = input.substring(9).split("/by", 2);
         if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
-            throw new CapyException("OOPS!!! Deadline command must have a description and /by date/time. Fill them up if you haven't done so!!");
+            throw new CapyException("OOPS!!! Deadline command must have a description and /by date/time. "
+                    + "Fill them up if you haven't done so!!");
         }
         String description = parts[0].trim();
         LocalDateTime by = Parser.parseDateTime(parts[1].trim());
@@ -118,7 +114,8 @@ public class Capy {
     private void handleEvent(String input) throws CapyException {
         String[] parts = input.substring(6).split("/from|/to");
         if (parts.length < 3 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty() || parts[2].trim().isEmpty()) {
-            throw new CapyException("OOPS!!! Event command must have a description, /from and /to time. Fill them up if you haven't done so!!");
+            throw new CapyException("OOPS!!! Event command must have a description, /from and /to time. "
+                    + "Fill them up if you haven't done so!!");
         }
         String description = parts[0].trim();
         LocalDateTime from = Parser.parseDateTime(parts[1].trim());
