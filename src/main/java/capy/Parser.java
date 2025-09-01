@@ -10,7 +10,13 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private static final DateTimeFormatter FILE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
-    /** Parses string to LocalDateTime */
+    /**
+     * Parses a string representation of a date and time into a {@link LocalDateTime} object.
+     *
+     * @param input The date and time string in the format "yyyy-MM-dd HHmm".
+     * @return A {@link LocalDateTime} object representing the input string.
+     * @throws CapyException If the input string is not in the expected format.
+     */
     public static LocalDateTime parseDateTime(String input) throws CapyException {
         try {
             return LocalDateTime.parse(input, FILE_FORMAT);
