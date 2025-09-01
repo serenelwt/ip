@@ -77,4 +77,13 @@ public class Ui {
         System.out.println(" Bye! Hope to see you again soon!");
         showLine();
     }
+
+    public void showTaskList(TaskList tasks) {
+        showLine();
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(" " + (i + 1) + ". " + tasks.getAllTasks().get(i));
+        }
+        showLine();
+    }
 }
