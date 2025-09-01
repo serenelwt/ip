@@ -9,9 +9,6 @@ import java.util.Scanner;
 public class Ui {
     private Scanner sc;
 
-    /**
-     * Creates a new Ui object and initializes the input scanner.
-     */
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -29,21 +26,11 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
-    /**
-     * Reads the next user command from standard input.
-     *
-     * @return The string entered by the user.
-     */
+    /** Reads the next user command */
     public String readCommand() {
         return sc.nextLine();
     }
 
-    /**
-     * Prints a message indicating that a task has been added.
-     *
-     * @param task The task that was added.
-     * @param size The current total number of tasks in the list.
-     */
     public void showAdded(Task task, int size) {
         showLine();
         System.out.println(" Got it. I've added this task:");
@@ -52,12 +39,7 @@ public class Ui {
         showLine();
     }
 
-    /**
-     * Prints a message indicating that a task has been removed.
-     *
-     * @param task The task that was removed.
-     * @param size The current total number of tasks in the list.
-     */
+    /** Prints a task that was removed */
     public void showRemoved(Task task, int size) {
         showLine();
         System.out.println(" Noted. I've removed this task:");
@@ -66,11 +48,7 @@ public class Ui {
         showLine();
     }
 
-    /**
-     * Prints a message indicating that a task has been marked as done.
-     *
-     * @param task The task that was marked done.
-     */
+    /** Prints a task that was marked done */
     public void showMark(Task task) {
         showLine();
         System.out.println(" Nice! I've marked this task as done:");
@@ -78,11 +56,7 @@ public class Ui {
         showLine();
     }
 
-    /**
-     * Prints a message indicating that a task has been unmarked as done.
-     *
-     * @param task The task that was unmarked.
-     */
+    /** Prints a task that was unmarked */
     public void showUnmark(Task task) {
         showLine();
         System.out.println(" OK, I've marked this task as not done yet:");
@@ -90,11 +64,7 @@ public class Ui {
         showLine();
     }
 
-    /**
-     * Prints an error message to the user.
-     *
-     * @param message The error message to display.
-     */
+    /** Prints an error message */
     public void showError(String message) {
         showLine();
         System.out.println(" " + message);
@@ -105,15 +75,6 @@ public class Ui {
     public void showBye() {
         showLine();
         System.out.println(" Bye! Hope to see you again soon!");
-        showLine();
-    }
-
-    public void showTaskList(TaskList tasks) {
-        showLine();
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(" " + (i + 1) + ". " + tasks.getAllTasks().get(i));
-        }
         showLine();
     }
 }

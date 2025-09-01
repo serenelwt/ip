@@ -31,6 +31,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Converts the task into a string representation for saving to file.
      * Subclasses (Todo, Deadline, Event) will extend this.
