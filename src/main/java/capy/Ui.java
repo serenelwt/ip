@@ -1,5 +1,6 @@
 package capy;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -75,6 +76,19 @@ public class Ui {
     public void showBye() {
         showLine();
         System.out.println(" Bye! Hope to see you again soon!");
+        showLine();
+    }
+
+    public void showFoundTasks(List<Task> matchingTasks) {
+        showLine();
+        if (matchingTasks.isEmpty()) {
+            System.out.println(" No tasks found matching your keyword.");
+        } else {
+            System.out.println(" Here are the matching tasks in your list:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println(" " + (i + 1) + ". " + matchingTasks.get(i));
+            }
+        }
         showLine();
     }
 }
