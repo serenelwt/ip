@@ -1,6 +1,7 @@
 package capy;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Capy is a simple command-line chatbot that manages a task list.
@@ -73,6 +74,11 @@ public class Capy {
                     int index = Integer.parseInt(input.substring(7)) - 1;
                     Task removed = tasks.delete(index);
                     ui.showRemoved(removed, tasks.size());
+
+                } else if (input.startsWith("find")) {
+                    String keyword = input.substring(5).trim();
+                    List<Task> results = tasks.findTasks(keyword);
+                    ui.showFoundTasks(results);
 
                 } else {
                     throw new CapyException("OOPS!!! Capy doesn't understand that command.");
