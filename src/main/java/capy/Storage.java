@@ -15,11 +15,22 @@ public class Storage {
     private String filePath;
     private static final DateTimeFormatter FILE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
+    /**
+     * Creates a Storage object with the specified file path.
+     *
+     * @param filePath The path to the file used for storing tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    /** Loads tasks from file. Returns empty list if file doesn't exist */
+    /**
+     * Loads tasks from the file.
+     * Returns an empty list if the file does not exist.
+     *
+     * @return A list of Task objects read from the file.
+     * @throws IOException If an I/O error occurs while reading the file.
+     */
     public List<Task> load() throws IOException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -59,7 +70,13 @@ public class Storage {
         return tasks;
     }
 
-    /** Saves tasks to the file */
+    /**
+     * Saves the list of tasks to the file.
+     * Creates the folder structure if it does not exist.
+     *
+     * @param tasks The list of Task objects to save.
+     * @throws IOException If an I/O error occurs while writing to the file.
+     */
     public void save(List<Task> tasks) throws IOException {
         File folder = new File(filePath).getParentFile();
         if (!folder.exists()) {
