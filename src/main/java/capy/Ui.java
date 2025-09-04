@@ -15,11 +15,8 @@ public class Ui {
     }
 
     /** Prints the welcome message */
-    public void showWelcome() {
-        showLine();
-        System.out.println(" Hello! I'm Capy! Nice to meet you!");
-        System.out.println(" What can I do for you?");
-        showLine();
+    public String showWelcome() {
+        return "Hello! I'm Capy! Nice to meet you!\nWhat can I do for you?";
     }
 
     /** Prints a line divider */
@@ -32,60 +29,51 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void showTaskList(TaskList tasks) {
-        showLine();
-        System.out.println("Here are the tasks in your list:");
+    public String showTaskList(TaskList tasks) {
+        String message = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(" " + (i + 1) + ". " + tasks.getAllTasks().get(i));
+            message += " " + (i + 1) + ". " + tasks.getAllTasks().get(i) +"\n";
         }
-        showLine();
+        return message;
     }
 
-    public void showAdded(Task task, int size) {
-        showLine();
-        System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + task);
-        System.out.println(" Now you have " + size + " tasks in the list.");
-        showLine();
+    public String showAdded(Task task, int size) {
+        String message = "Got it. I've added this task:\n";
+        message += "   " + task + "\n";
+        message += "Now you have " + size + " tasks in the list.";
+        return message;
     }
 
     /** Prints a task that was removed */
-    public void showRemoved(Task task, int size) {
-        showLine();
-        System.out.println(" Noted. I've removed this task:");
-        System.out.println("   " + task);
-        System.out.println(" Now you have " + size + " tasks in the list.");
-        showLine();
+    public String showRemoved(Task task, int size) {
+        String message = "Noted. I've removed this task:\n";
+        message += "   " + task + "\n";
+        message += "Now you have " + size + " tasks in the list.";
+        return message;
     }
 
     /** Prints a task that was marked done */
-    public void showMark(Task task) {
-        showLine();
-        System.out.println(" Nice! I've marked this task as done:");
-        System.out.println("   " + task);
-        showLine();
+    public String showMark(Task task) {
+        String message = "Nice! I've marked this task as done:\n";
+        message += "   " + task;
+        return message;
     }
 
     /** Prints a task that was unmarked */
-    public void showUnmark(Task task) {
-        showLine();
-        System.out.println(" OK, I've marked this task as not done yet:");
-        System.out.println("   " + task);
-        showLine();
+    public String showUnmark(Task task) {
+        String message = "OK, I've marked this task as not done yet:\n";
+        message += "   " + task;
+        return message;
     }
 
     /** Prints an error message */
-    public void showError(String message) {
-        showLine();
-        System.out.println(" " + message);
-        showLine();
+    public String showError(String str) {
+        return " " + str;
     }
 
     /** Prints the goodbye message */
-    public void showBye() {
-        showLine();
-        System.out.println(" Bye! Hope to see you again soon!");
-        showLine();
+    public String showBye() {
+        return "Bye! Hope to see you again soon!";
     }
 
     /**
@@ -93,16 +81,16 @@ public class Ui {
      *
      * @param matchingTasks List of tasks that matched the keyword.
      */
-    public void showFoundTasks(List<Task> matchingTasks) {
-        showLine();
+    public String showFoundTasks(List<Task> matchingTasks) {
+        String message = "";
         if (matchingTasks.isEmpty()) {
-            System.out.println(" No tasks found matching your keyword.");
+            message = "No tasks found matching your keyword.\n";
         } else {
-            System.out.println(" Here are the matching tasks in your list:");
+            message = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < matchingTasks.size(); i++) {
-                System.out.println(" " + (i + 1) + ". " + matchingTasks.get(i));
+                message += " " + (i + 1) + ". " + matchingTasks.get(i);
             }
         }
-        showLine();
+        return message;
     }
 }

@@ -26,6 +26,10 @@ public class Capy {
         }
     }
 
+    public Capy() {
+        this(DATA_FILE);
+    }
+
     /**
      * Main loop to run the chatbot
      */
@@ -91,19 +95,23 @@ public class Capy {
         }
     }
 
-    /** Handles todo command */
-    private void handleTodo(String input) throws CapyException {
+    /**
+     * Handles todo command
+     */
+    private String handleTodo(String input) throws CapyException {
         if (input.trim().equals("todo")) {
             throw new CapyException("OOPS! The description of a todo cannot be empty!");
         }
         String description = input.substring(5).trim();
         Task task = new Todo(description);
         tasks.add(task);
-        ui.showAdded(task, tasks.size());
+        return ui.showAdded(task, tasks.size());
     }
 
-    /** Handles deadline command */
-    private void handleDeadline(String input) throws CapyException {
+    /**
+     * Handles deadline command
+     */
+    private String handleDeadline(String input) throws CapyException {
         String[] parts = input.substring(9).split("/by", 2);
         if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
             throw new CapyException("OOPS!!! Deadline command must have a description and /by date/time. "
@@ -113,11 +121,13 @@ public class Capy {
         LocalDateTime by = Parser.parseDateTime(parts[1].trim());
         Task task = new Deadline(description, by);
         tasks.add(task);
-        ui.showAdded(task, tasks.size());
+        return ui.showAdded(task, tasks.size());
     }
 
-    /** Handles event command */
-    private void handleEvent(String input) throws CapyException {
+    /**
+     * Handles event command
+     */
+    private String handleEvent(String input) throws CapyException {
         String[] parts = input.substring(6).split("/from|/to");
         if (parts.length < 3 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty() || parts[2].trim().isEmpty()) {
             throw new CapyException("OOPS!!! Event command must have a description, /from and /to time. "
@@ -128,11 +138,77 @@ public class Capy {
         LocalDateTime to = Parser.parseDateTime(parts[2].trim());
         Task task = new Event(description, from, to);
         tasks.add(task);
-        ui.showAdded(task, tasks.size());
+        return ui.showAdded(task, tasks.size());
     }
 
-    /** Main entry point */
+    /**
+     * Main entry point
+     */
     public static void main(String[] args) {
         new Capy(DATA_FILE).run();
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        try {
+            input = ui.readCommand();
+
+            if (input.equals("bye")) {
+                storage.save(tasks.getAllTasks());
+                return ui.showBye();
+
+            } else if (input.equals("list")) {
+                storage.save(tasks.getAllTasks());
+                return ui.showTaskList(tasks);
+
+            } else if (input.startsWith("todo")) {
+                storage.save(tasks.getAllTasks());
+                return handleTodo(input);
+
+            } else if (input.startsWith("deadline")) {
+                storage.save(tasks.getAllTasks());
+                return handleDeadline(input);
+
+            } else if (input.startsWith("event")) {
+                storage.save(tasks.getAllTasks());
+                return handleEvent(input);
+
+            } else if (input.startsWith("mark")) {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                tasks.mark(index);
+                storage.save(tasks.getAllTasks());
+                return ui.showMark(tasks.getAllTasks().get(index));
+
+            } else if (input.startsWith("unmark")) {
+                int index = Integer.parseInt(input.substring(7)) - 1;
+                tasks.unmark(index);
+                storage.save(tasks.getAllTasks());
+                return ui.showUnmark(tasks.getAllTasks().get(index));
+
+            } else if (input.startsWith("delete")) {
+                int index = Integer.parseInt(input.substring(7)) - 1;
+                Task removed = tasks.delete(index);
+                storage.save(tasks.getAllTasks());
+                return ui.showRemoved(removed, tasks.size());
+
+            } else if (input.startsWith("find")) {
+                String keyword = input.substring(5).trim();
+                List<Task> results = tasks.findTasks(keyword);
+                storage.save(tasks.getAllTasks());
+                return ui.showFoundTasks(results);
+
+            } else {
+                throw new CapyException("OOPS!!! Capy doesn't understand that command.");
+            }
+
+        } catch (CapyException e) {
+            return ui.showError(e.getMessage());
+        } catch (NumberFormatException e) {
+            return ui.showError("OOPS!!! That doesn't look like a valid number.");
+        } catch (Exception e) {
+            return ui.showError("An unexpected error occurred: " + e.getMessage());
+        }
     }
 }
