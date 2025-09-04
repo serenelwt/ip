@@ -153,8 +153,6 @@ public class Capy {
      */
     public String getResponse(String input) {
         try {
-            input = ui.readCommand();
-
             if (input.equals("bye")) {
                 storage.save(tasks.getAllTasks());
                 return ui.showBye();

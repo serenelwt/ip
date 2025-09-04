@@ -98,8 +98,8 @@ public class Main extends Application {
         String userText = userInput.getText();
         String capyText = capy.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, userImage),
-                new DialogBox(capyText, dukeImage)
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getCapyDialog(capyText, dukeImage)
         );
         userInput.clear();
     }
