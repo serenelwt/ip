@@ -16,6 +16,7 @@ public class Capy {
     private TaskList tasks;
 
     public Capy(String filePath) {
+        assert filePath != null && !filePath.isBlank() : "File path must not be null or empty";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
