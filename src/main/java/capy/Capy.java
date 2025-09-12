@@ -1,5 +1,6 @@
 package capy;
 
+import capy.command.Command;
 import capy.task.Deadline;
 import capy.task.Event;
 import capy.task.Task;
@@ -43,7 +44,7 @@ public class Capy {
 
         boolean isExit = false;
 
-        while (!isExit) {
+        /* while (!isExit) {
             try {
                 String input = ui.readCommand();
                 ui.showLine();
@@ -96,6 +97,21 @@ public class Capy {
                 ui.showError("OOPS!!! That doesn't look like a valid number.");
             } catch (Exception e) {
                 ui.showError("An unexpected error occurred: " + e.getMessage());
+            }
+        } */
+        while (!isExit) {
+            try {
+                String input = ui.readCommand();
+                ui.showLine();
+
+                Command command = Parser.parse(input); // Parser now returns a Command
+                String output = command.execute(tasks, ui, storage); // Execute the command
+                System.out.println(output);
+
+                isExit = command.isExit(); // Command determines if program should exit
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
             }
         }
     }
@@ -156,7 +172,7 @@ public class Capy {
     /**
      * Generates a response for the user's chat message.
      */
-    public String getResponse(String input) {
+    /* public String getResponse(String input) {
         try {
             if (input.equals("bye")) {
                 storage.save(tasks.getAllTasks());
@@ -213,5 +229,16 @@ public class Capy {
         } catch (Exception e) {
             return ui.showError("An unexpected error occurred: " + e.getMessage());
         }
+    } */
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);       // Parser returns a Command
+            String output = command.execute(tasks, ui, storage); // Execute command
+            return output;                               // Return response string
+        } catch (Exception e) {
+            return ui.showError("An unexpected error occurred: " + e.getMessage());
+        }
     }
+
 }
