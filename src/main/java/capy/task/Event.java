@@ -58,7 +58,7 @@ public class Event extends Task {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Event)) return false;
-        Event other = (Event) o;                    
+        Event other = (Event) o;
         return description.equals(other.description)
                 && from.equals(other.from)
                 && to.equals(other.to);
