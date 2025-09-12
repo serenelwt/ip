@@ -1,4 +1,4 @@
-package capy;
+package capy.task;
 
 /**
  * Represents a task.

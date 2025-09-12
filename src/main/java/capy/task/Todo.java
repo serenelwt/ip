@@ -1,4 +1,4 @@
-package capy;
+package capy.task;
 
 /**
  * Represents a task of type <i>Todo</i>, which is a task without any specific
