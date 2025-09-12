@@ -6,6 +6,7 @@ import capy.command.DeadlineCommand;
 import capy.command.EventCommand;
 import capy.command.ExitCommand;
 import capy.command.ListCommand;
+import capy.command.MarkCommand;
 
 public class Parser {
     public static Command parse(String fullCommand) throws CapyException {
@@ -15,23 +16,34 @@ public class Parser {
         switch (commandWord) {
             case "bye":
                 return new ExitCommand();
+
             case "list":
                 return new ListCommand();
+
             case "todo":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
                     throw new CapyException("The description of a todo cannot be empty.");
                 }
                 return new TodoCommand(parts[1].trim());
+
             case "deadline":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
                     throw new CapyException("The description of a deadline cannot be empty.");
                 }
                 return new DeadlineCommand(parts[1].trim());
+
             case "event":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
                     throw new CapyException("The description of an event cannot be empty.");
                 }
                 return new EventCommand(parts[1].trim());
+
+            case "mark":
+                if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                    throw new CapyException("Please specify the task number to mark.");
+                }
+                return new MarkCommand(parts[1].trim());
+
             default:
                 throw new CapyException("I'm sorry, but I don't know what that means :-(");
         }
