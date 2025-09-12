@@ -67,7 +67,7 @@ public class Capy {
     public static void main(String[] args) {
         new Capy(DATA_FILE).run();
     }
-    
+
 
     public String getResponse(String input) {
         try {
