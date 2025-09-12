@@ -1,5 +1,10 @@
 package capy;
 
+import capy.task.Deadline;
+import capy.task.Event;
+import capy.task.Task;
+import capy.task.Todo;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
