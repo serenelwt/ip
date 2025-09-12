@@ -103,4 +103,13 @@ public class TaskList {
         }
         return matchingTasks;
     }
+
+    public boolean hasDuplicate(Task newTask) {
+        for (Task task : tasks) {
+            if (task.getDescription().equals(newTask.getDescription())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
