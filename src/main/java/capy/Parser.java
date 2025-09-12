@@ -1,27 +1,22 @@
 package capy;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import capy.command.Command;
+import capy.command.TodoCommand;
 
-/**
- * Parser is responsible for parsing user input commands and extracting details.
- */
 public class Parser {
-    private static final DateTimeFormatter FILE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    public static Command parse(String fullCommand) throws CapyException {
+        String[] parts = fullCommand.split(" ", 2);
+        String commandWord = parts[0];
 
-    /**
-     * Parses a string representation of a date and time into a {@link LocalDateTime} object.
-     *
-     * @param input The date and time string in the format "yyyy-MM-dd HHmm".
-     * @return A {@link LocalDateTime} object representing the input string.
-     * @throws CapyException If the input string is not in the expected format.
-     */
-    public static LocalDateTime parseDateTime(String input) throws CapyException {
-        try {
-            return LocalDateTime.parse(input, FILE_FORMAT);
-        } catch (DateTimeParseException e) {
-            throw new CapyException("OOPS! Invalid date/time format. Use yyyy-MM-dd HHmm");
+        switch (commandWord) {
+            case "todo":
+                if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                    throw new CapyException("The description of a todo cannot be empty.");
+                }
+                return new TodoCommand(parts[1].trim());
+            // other cases...
+            default:
+                throw new CapyException("I'm sorry, but I don't know what that means :-(");
         }
     }
 }

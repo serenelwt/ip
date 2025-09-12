@@ -123,7 +123,7 @@ public class Capy {
                     + "Fill them up if you haven't done so!!");
         }
         String description = parts[0].trim();
-        LocalDateTime by = Parser.parseDateTime(parts[1].trim());
+        LocalDateTime by = DateTimeParser.parseDateTime(parts[1].trim());
         Task task = new Deadline(description, by);
         tasks.add(task);
         return ui.showAdded(task, tasks.size());
@@ -139,8 +139,8 @@ public class Capy {
                     + "Fill them up if you haven't done so!!");
         }
         String description = parts[0].trim();
-        LocalDateTime from = Parser.parseDateTime(parts[1].trim());
-        LocalDateTime to = Parser.parseDateTime(parts[2].trim());
+        LocalDateTime from = DateTimeParser.parseDateTime(parts[1].trim());
+        LocalDateTime to = DateTimeParser.parseDateTime(parts[2].trim());
         Task task = new Event(description, from, to);
         tasks.add(task);
         return ui.showAdded(task, tasks.size());
