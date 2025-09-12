@@ -40,6 +40,11 @@ public class DeadlineCommand extends Command {
         }
 
         Task task = new Deadline(description, by);
+
+        if (tasks.hasDuplicate(task)) {
+            return ui.showError("This task already exists! Duplicate not added.");
+        }
+        
         tasks.add(task);
 
         try {
