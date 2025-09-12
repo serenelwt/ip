@@ -30,6 +30,11 @@ public class EventCommand extends Command {
             LocalDateTime to = DateTimeParser.parseDateTime(parts[2].trim());
 
             Task task = new Event(description, from, to);
+
+            if (tasks.hasDuplicate(task)) {
+                return ui.showError("This task already exists! Duplicate not added.");
+            }
+
             tasks.add(task);
 
             try {
