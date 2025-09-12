@@ -9,6 +9,7 @@ import capy.command.ListCommand;
 import capy.command.MarkCommand;
 import capy.command.UnmarkCommand;
 import capy.command.DeleteCommand;
+import capy.command.FindCommand;
 
 public class Parser {
     public static Command parse(String fullCommand) throws CapyException {
@@ -57,6 +58,12 @@ public class Parser {
                     throw new CapyException("Please specify the task number to delete.");
                 }
                 return new DeleteCommand(parts[1].trim());
+
+            case "find":
+                if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                    throw new CapyException("Please specify a keyword to search.");
+                }
+                return new FindCommand(parts[1].trim());
 
             default:
                 throw new CapyException("I'm sorry, but I don't know what that means :-(");
