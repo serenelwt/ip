@@ -1,0 +1,13 @@
+package capy.command;
+
+import capy.TaskList;
+import capy.Ui;
+import capy.Storage;
+
+public class ListCommand extends Command {
+
+    @Override
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showTaskList(tasks);
+    }
+}
