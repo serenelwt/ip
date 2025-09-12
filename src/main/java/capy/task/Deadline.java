@@ -45,4 +45,11 @@ public class Deadline extends Task {
         DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
         return "[D]" + super.toString() + " (by: " + by.format(outputFormat) + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Deadline)) return false;
+        Deadline other = (Deadline) o;
+        return description.equals(other.description) && by.equals(other.by);
+    }
 }
