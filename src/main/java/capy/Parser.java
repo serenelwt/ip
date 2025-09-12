@@ -7,6 +7,7 @@ import capy.command.EventCommand;
 import capy.command.ExitCommand;
 import capy.command.ListCommand;
 import capy.command.MarkCommand;
+import capy.command.UnmarkCommand;
 
 public class Parser {
     public static Command parse(String fullCommand) throws CapyException {
@@ -43,6 +44,12 @@ public class Parser {
                     throw new CapyException("Please specify the task number to mark.");
                 }
                 return new MarkCommand(parts[1].trim());
+
+            case "unmark":
+                if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                    throw new CapyException("Please specify the task number to unmark.");
+                }
+                return new UnmarkCommand(parts[1].trim());
 
             default:
                 throw new CapyException("I'm sorry, but I don't know what that means :-(");
