@@ -24,6 +24,7 @@ public class Storage {
      * @param filePath The path to the file used for storing tasks.
      */
     public Storage(String filePath) {
+        assert filePath != null && !filePath.isBlank() : "File path must not be null or empty";
         this.filePath = filePath;
     }
 
@@ -88,6 +89,7 @@ public class Storage {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Task task : tasks) {
+                assert task != null : "Task in list must not be null";
                 writer.write(task.toFileString());
                 writer.newLine();
             }
