@@ -234,8 +234,12 @@ public class Capy {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);       // Parser returns a Command
-            String output = command.execute(tasks, ui, storage); // Execute command
-            return output;                               // Return response string
+            String response = command.execute(tasks, ui, storage); // Execute command
+            return response;                               // Return response string
+        } catch (CapyException e) {
+            return ui.showError(e.getMessage());
+        } catch (NumberFormatException e) {
+            return ui.showError("OOPS!!! That doesn't look like a valid number.");
         } catch (Exception e) {
             return ui.showError("An unexpected error occurred: " + e.getMessage());
         }
