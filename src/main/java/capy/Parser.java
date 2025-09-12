@@ -4,6 +4,7 @@ import capy.command.Command;
 import capy.command.TodoCommand;
 import capy.command.DeadlineCommand;
 import capy.command.EventCommand;
+import capy.command.ExitCommand;
 
 public class Parser {
     public static Command parse(String fullCommand) throws CapyException {
@@ -11,6 +12,8 @@ public class Parser {
         String commandWord = parts[0];
 
         switch (commandWord) {
+            case "bye":
+                return new ExitCommand();
             case "todo":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
                     throw new CapyException("The description of a todo cannot be empty.");
