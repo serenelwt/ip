@@ -1,5 +1,7 @@
 package capy;
 
+import capy.exception.CapyException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;

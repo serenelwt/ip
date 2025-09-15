@@ -1,4 +1,4 @@
-package capy;
+package capy.gui;
 
 import java.io.IOException;
 import java.util.Collections;

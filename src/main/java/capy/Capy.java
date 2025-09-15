@@ -1,13 +1,8 @@
 package capy;
 
 import capy.command.Command;
-import capy.task.Deadline;
-import capy.task.Event;
-import capy.task.Task;
-import capy.task.Todo;
-
-import java.time.LocalDateTime;
-import java.util.List;
+import capy.exception.CapyException;
+import capy.task.*;
 
 /**
  * Capy is a simple command-line chatbot that manages a task list.

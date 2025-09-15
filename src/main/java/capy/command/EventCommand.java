@@ -1,7 +1,7 @@
 package capy.command;
 
-import capy.CapyException;
-import capy.TaskList;
+import capy.exception.CapyException;
+import capy.task.TaskList;
 import capy.Ui;
 import capy.Storage;
 import capy.task.Task;

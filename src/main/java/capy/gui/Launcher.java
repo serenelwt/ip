@@ -1,4 +1,4 @@
-package capy;
+package capy.gui;
 
 import javafx.application.Application;
 

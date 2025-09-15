@@ -1,6 +1,4 @@
-package capy;
-
-import capy.task.Task;
+package capy.task;
 
 import java.util.ArrayList;
 import java.util.List;

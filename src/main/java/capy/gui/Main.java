@@ -1,7 +1,8 @@
-package capy;
+package capy.gui;
 
 import java.io.IOException;
 
+import capy.Capy;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(417);
-            fxmlLoader.<capy.MainWindow>getController().setCapy(capy);  // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setCapy(capy);  // inject the Duke instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

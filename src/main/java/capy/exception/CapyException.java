@@ -1,4 +1,4 @@
-package capy;
+package capy.exception;
 
 /**
  * Represents a custom exception used in the Capy program.

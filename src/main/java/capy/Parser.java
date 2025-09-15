@@ -10,6 +10,7 @@ import capy.command.MarkCommand;
 import capy.command.UnmarkCommand;
 import capy.command.DeleteCommand;
 import capy.command.FindCommand;
+import capy.exception.CapyException;
 
 public class Parser {
     public static Command parse(String fullCommand) throws CapyException {
