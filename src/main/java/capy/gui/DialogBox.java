@@ -49,6 +49,8 @@ public class DialogBox extends HBox {
         // Clip to circle
         javafx.scene.shape.Circle clip = new javafx.scene.shape.Circle(radius, radius, radius);
         displayPicture.setClip(clip);
+
+        dialog.getStyleClass().add("bot-label");
     }
 
     /**

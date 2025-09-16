@@ -11,6 +11,30 @@
     -fx-border-radius: 1em 1em 1em 0;
 }
 
+/* Bot messages */
+.bot-label {
+    -fx-background-color: #f5e0c3; /* warm beige */
+    -fx-text-fill: #3b2f2f;        /* dark brown text */
+    -fx-background-radius: 15px;   /* rounded edges */
+    -fx-padding: 8px 12px;         /* spacing inside bubble */
+}
+
+/* User messages */
+.user-label {
+    -fx-background-color: #b7e4c7; /* pastel green */
+    -fx-text-fill: #1a1a1a;        /* dark text */
+    -fx-background-radius: 15px;
+    -fx-padding: 8px 12px;
+}
+
+/* Optional alternative user bubble (sky blue) */
+.user-label-alt {
+    -fx-background-color: #a2d2ff;
+    -fx-text-fill: #1a1a1a;
+    -fx-background-radius: 15px;
+    -fx-padding: 8px 12px;
+}
+
 #displayPicture {
     /* Shadow effect on image. */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 5, 5);
