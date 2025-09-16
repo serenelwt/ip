@@ -36,6 +36,19 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        // Use chatGPT to generate profile pic and make them circular
+        // --- Make profile picture circular ---
+        double radius = 25.0;
+
+        // Ensure image scales to fill circle
+        displayPicture.setPreserveRatio(false); // stretch to fit square
+        displayPicture.setFitWidth(radius * 2);
+        displayPicture.setFitHeight(radius * 2);
+
+        // Clip to circle
+        javafx.scene.shape.Circle clip = new javafx.scene.shape.Circle(radius, radius, radius);
+        displayPicture.setClip(clip);
     }
 
     /**

@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClass.set("capy.Launcher")
+    mainClass.set("capy.gui.Launcher")
 }
 
 shadowJar {
