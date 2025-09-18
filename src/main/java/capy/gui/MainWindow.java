@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getCapyDialog("Hello! I'm Capy! \nWhat can I do for you today?", capyImage)
+                DialogBox.getCapyDialog("Hey buddy, Capy's here... \nWhat can I do for you today...", capyImage)
         );
     }
 
