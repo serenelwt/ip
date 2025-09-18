@@ -19,7 +19,7 @@ public class Ui {
 
     /** Prints the welcome message */
     public String showWelcome() {
-        return "Hello! I'm Capy! Nice to meet you!\nWhat can I do for you?";
+        return "Hey buddy, Capy's here...\nWhat can I do for you today...";
     }
 
     /** Prints a line divider */
@@ -41,7 +41,7 @@ public class Ui {
     }
 
     public String showAdded(Task task, int size) {
-        String message = "Got it. I've added this task:\n";
+        String message = "Got it... Capy has added this task:\n";
         message += "   " + task + "\n";
         message += "Now you have " + size + " tasks in the list.";
         return message;
@@ -49,7 +49,7 @@ public class Ui {
 
     /** Prints a task that was removed */
     public String showRemoved(Task task, int size) {
-        String message = "Noted. I've removed this task:\n";
+        String message = "Noted... Capy has removed this task:\n";
         message += "   " + task + "\n";
         message += "Now you have " + size + " tasks in the list.";
         return message;
@@ -57,14 +57,14 @@ public class Ui {
 
     /** Prints a task that was marked done */
     public String showMark(Task task) {
-        String message = "Nice! I've marked this task as done:\n";
+        String message = "OK... Capy has marked this task as done:\n";
         message += "   " + task;
         return message;
     }
 
     /** Prints a task that was unmarked */
     public String showUnmark(Task task) {
-        String message = "OK, I've marked this task as not done yet:\n";
+        String message = "OK... Capy has marked this task as not done yet:\n";
         message += "   " + task;
         return message;
     }
@@ -76,7 +76,7 @@ public class Ui {
 
     /** Prints the goodbye message */
     public String showBye() {
-        return "Bye! Hope to see you again soon!";
+        return "Bai... Hope to see you again soon!";
     }
 
     /**
