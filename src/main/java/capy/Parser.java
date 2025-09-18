@@ -26,48 +26,48 @@ public class Parser {
 
             case "todo":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                    throw new CapyException("The description of a todo cannot be empty.");
+                    throw new CapyException("The description of a todo cannot be empty...");
                 }
                 return new TodoCommand(parts[1].trim());
 
             case "deadline":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                    throw new CapyException("The description of a deadline cannot be empty.");
+                    throw new CapyException("The description of a deadline cannot be empty...");
                 }
                 return new DeadlineCommand(parts[1].trim());
 
             case "event":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                    throw new CapyException("The description of an event cannot be empty.");
+                    throw new CapyException("The description of an event cannot be empty...");
                 }
                 return new EventCommand(parts[1].trim());
 
             case "mark":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                    throw new CapyException("Please specify the task number to mark.");
+                    throw new CapyException("Please specify the task number to mark...");
                 }
                 return new MarkCommand(parts[1].trim());
 
             case "unmark":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                    throw new CapyException("Please specify the task number to unmark.");
+                    throw new CapyException("Please specify the task number to unmark...");
                 }
                 return new UnmarkCommand(parts[1].trim());
 
             case "delete":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                    throw new CapyException("Please specify the task number to delete.");
+                    throw new CapyException("Please specify the task number to delete...");
                 }
                 return new DeleteCommand(parts[1].trim());
 
             case "find":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                    throw new CapyException("Please specify a keyword to search.");
+                    throw new CapyException("Please specify a keyword to search...");
                 }
                 return new FindCommand(parts[1].trim());
 
             default:
-                throw new CapyException("I'm sorry, but I don't know what that means :-(");
+                throw new CapyException("Capy do not know what you mean...");
         }
     }
 }

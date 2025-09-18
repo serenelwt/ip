@@ -19,7 +19,7 @@ public class Ui {
 
     /** Prints the welcome message */
     public String showWelcome() {
-        return "Hey buddy, Capy's here...\nWhat can I do for you today...";
+        return "Hey buddy, Capy's here...\nWhat do you want from me today...";
     }
 
     /** Prints a line divider */
@@ -33,7 +33,7 @@ public class Ui {
     }
 
     public String showTaskList(TaskList tasks) {
-        String message = "Here are the tasks in your list:\n";
+        String message = "Here are the tasks in your list...\n";
         for (int i = 0; i < tasks.size(); i++) {
             message += " " + (i + 1) + ". " + tasks.getAllTasks().get(i) +"\n";
         }
@@ -41,30 +41,30 @@ public class Ui {
     }
 
     public String showAdded(Task task, int size) {
-        String message = "Got it... Capy has added this task:\n";
+        String message = "Got it...Capy has added this task...\n";
         message += "   " + task + "\n";
-        message += "Now you have " + size + " tasks in the list.";
+        message += "Now you have " + size + " tasks in the list...";
         return message;
     }
 
     /** Prints a task that was removed */
     public String showRemoved(Task task, int size) {
-        String message = "Noted... Capy has removed this task:\n";
+        String message = "Noted...Capy has removed this task...\n";
         message += "   " + task + "\n";
-        message += "Now you have " + size + " tasks in the list.";
+        message += "Now you have " + size + " tasks in the list...";
         return message;
     }
 
     /** Prints a task that was marked done */
     public String showMark(Task task) {
-        String message = "OK... Capy has marked this task as done:\n";
+        String message = "OK...Capy has marked this task as done...\n";
         message += "   " + task;
         return message;
     }
 
     /** Prints a task that was unmarked */
     public String showUnmark(Task task) {
-        String message = "OK... Capy has marked this task as not done yet:\n";
+        String message = "OK...Capy has marked this task as not done yet...\n";
         message += "   " + task;
         return message;
     }
@@ -76,7 +76,7 @@ public class Ui {
 
     /** Prints the goodbye message */
     public String showBye() {
-        return "Bai... Hope to see you again soon!";
+        return "Bai...Hope to never see you again...";
     }
 
     /**
@@ -87,9 +87,9 @@ public class Ui {
     public String showFoundTasks(List<Task> matchingTasks) {
         String message = "";
         if (matchingTasks.isEmpty()) {
-            message = "No tasks found matching your keyword.\n";
+            message = "Capy did not find any tasks that match your keyword...\n";
         } else {
-            message = "Here are the matching tasks in your list:\n";
+            message = "Capy found these matching tasks in your list...\n";
             for (int i = 0; i < matchingTasks.size(); i++) {
                 message += " " + (i + 1) + ". " + matchingTasks.get(i);
             }
