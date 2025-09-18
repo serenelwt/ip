@@ -23,7 +23,7 @@ public class DateTimeParser {
         try {
             return LocalDateTime.parse(input, FILE_FORMAT);
         } catch (DateTimeParseException e) {
-            throw new CapyException("OOPS! Invalid date/time format. Use yyyy-MM-dd HHmm");
+            throw new CapyException("Invalid date/time format...Use yyyy-MM-dd HHmm");
         }
     }
 }

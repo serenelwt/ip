@@ -20,9 +20,9 @@ public class MarkCommand extends Command {
             storage.save(tasks.getAllTasks()); // may throw IOException
             return ui.showMark(task);
         } catch (NumberFormatException e) {
-            return ui.showError("OOPS!!! That doesn't look like a valid number.");
+            return ui.showError("That doesn't look like a valid number...");
         } catch (IndexOutOfBoundsException e) {
-            return ui.showError("OOPS!!! Task index is out of range.");
+            return ui.showError("Task index is out of range...");
         } catch (Exception e) {
             return ui.showError("An unexpected error occurred: " + e.getMessage());
         }

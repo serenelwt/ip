@@ -23,12 +23,12 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (fullDescription.isBlank()) {
-            return ui.showError("OOPS! The description of a deadline cannot be empty!");
+            return ui.showError("The description of a deadline cannot be empty...");
         }
 
         String[] parts = fullDescription.split("/by", 2);
         if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
-            return ui.showError("OOPS! Deadline must have a description and /by date/time.");
+            return ui.showError("Deadline must have a description and /by date/time...");
         }
 
         String description = parts[0].trim();
@@ -36,13 +36,13 @@ public class DeadlineCommand extends Command {
         try {
             by = DateTimeParser.parseDateTime(parts[1].trim());
         } catch (CapyException e) {
-            return ui.showError("OOPS! Invalid date/time format. Use yyyy-MM-dd HHmm");
+            return ui.showError("Invalid date/time format...Use yyyy-MM-dd HHmm");
         }
 
         Task task = new Deadline(description, by);
 
         if (tasks.hasDuplicate(task)) {
-            return ui.showError("This task already exists! Duplicate not added.");
+            return ui.showError("This task already exists...Duplicate not added...");
         }
 
         tasks.add(task);

@@ -20,7 +20,7 @@ public class TodoCommand extends Command {
         Task task = new Todo(description);
 
         if (tasks.hasDuplicate(task)) {
-            return ui.showError("This task already exists! Duplicate not added.");
+            return ui.showError("This task already exists...Duplicate not added...");
         }
 
         tasks.add(task);

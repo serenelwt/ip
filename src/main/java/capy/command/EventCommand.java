@@ -23,7 +23,7 @@ public class EventCommand extends Command {
             // Split args into description, from and to
             String[] parts = args.split("/from|/to");
             if (parts.length < 3 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty() || parts[2].trim().isEmpty()) {
-                throw new CapyException("OOPS!!! Event command must have a description, /from and /to time.");
+                throw new CapyException("Event command must have a description, /from and /to time...");
             }
             String description = parts[0].trim();
             LocalDateTime from = DateTimeParser.parseDateTime(parts[1].trim());
@@ -32,7 +32,7 @@ public class EventCommand extends Command {
             Task task = new Event(description, from, to);
 
             if (tasks.hasDuplicate(task)) {
-                return ui.showError("This task already exists! Duplicate not added.");
+                return ui.showError("This task already exists...Duplicate not added...");
             }
 
             tasks.add(task);
