@@ -29,6 +29,10 @@ public class EventCommand extends Command {
             LocalDateTime from = DateTimeParser.parseDateTime(parts[1].trim());
             LocalDateTime to = DateTimeParser.parseDateTime(parts[2].trim());
 
+            if (from.isAfter(to) || from.equals(to)) {
+                throw new CapyException("Start time must be before end time...");
+            }
+
             Task task = new Event(description, from, to);
 
             if (tasks.hasDuplicate(task)) {
