@@ -15,9 +15,6 @@ import capy.task.Task;
 public class DeleteCommand extends Command {
     private final String argument;
 
-    /** The argument representing the 1-based index of the task to delete. */
-    private final String argument;
-
     /**
      * Constructs a {@code DeleteCommand} with the given argument.
      *
