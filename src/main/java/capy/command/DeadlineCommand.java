@@ -11,15 +11,36 @@ import capy.DateTimeParser;
 import java.time.LocalDateTime;
 
 /**
- * Adds a Deadline task to the TaskList.
+ * Represents a command to add a {@link Deadline} task to the {@link TaskList}.
+ * <p>
+ * This command parses a full description in the format:
+ * <pre>description /by yyyy-MM-dd HHmm</pre>
+ * and creates a {@link Deadline} task with the specified description and deadline.
+ * It also checks for duplicate tasks and saves the updated task list to storage.
  */
 public class DeadlineCommand extends Command {
     private final String fullDescription;
 
+    /**
+     * Constructs a {@code DeadlineCommand} with the given full description.
+     *
+     * @param fullDescription The full description of the deadline task, including /by date/time.
+     */
     public DeadlineCommand(String fullDescription) {
         this.fullDescription = fullDescription;
     }
 
+    /**
+     * Executes this command to add a {@link Deadline} task to the provided {@link TaskList}.
+     * <p>
+     * It validates the input, checks for duplicates, saves the updated task list,
+     * and returns a message indicating success or failure.
+     *
+     * @param tasks   The {@link TaskList} to which the new task will be added.
+     * @param ui      The {@link Ui} instance used to generate user-facing messages.
+     * @param storage The {@link Storage} used to persist tasks.
+     * @return A string message indicating the result of the command execution.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (fullDescription.isBlank()) {
